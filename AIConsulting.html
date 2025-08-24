@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Consulting - Matt Puretz</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+      :root {
+        --primary: #d4a574;
+        --secondary: #e8c4a0;
+        --accent: #c08552;
+        --sage: #87a96b;
+        --blush: #f4e4e1;
+        --cream: #faf7f4;
+        --charcoal: #3a3a3a;
+        --text: #4a4a4a;
+        --text-light: #7a7a7a;
+        --border: #e5d5d0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        color: var(--text);
+        background-color: var(--cream);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--charcoal);
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--accent);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      a:hover {
+        color: var(--primary);
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98) 0%,
+          rgba(255, 255, 255, 0.95) 100%
+        );
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--border);
+        transition: all 0.4s ease;
+      }
+
+      header.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        letter-spacing: -0.5px;
+      }
+
+      .logo span {
+        font-weight: 300;
+        font-style: italic;
+        color: var(--primary);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      nav a {
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      .mobile-menu {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--charcoal);
+      }
+
+      /* AI Hero */
+      .ai-hero {
+        padding: 10rem 2rem 6rem;
+        background: linear-gradient(
+          135deg,
+          var(--cream) 0%,
+          var(--sage) 20%,
+          var(--blush) 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ai-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            circle at 20% 50%,
+            rgba(135, 169, 107, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(212, 165, 116, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .ai-badge {
+        display: inline-block;
+        background: var(--sage);
+        color: white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+      }
+
+      .ai-title {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--charcoal), var(--sage));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .ai-subtitle {
+        font-size: 1.3rem;
+        color: var(--text);
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        line-height: 1.8;
+      }
+
+      .ai-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .ai-feature {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .ai-feature i {
+        font-size: 1.5rem;
+        color: var(--sage);
+      }
+
+      .ai-feature span {
+        font-weight: 500;
+        color: var(--charcoal);
+      }
+
+      /* AI Services */
+      .ai-services {
+        padding: 6rem 2rem;
+        background: white;
+      }
+
+      .services-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .ai-services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .ai-service-card {
+        padding: 2.5rem;
+        background: linear-gradient(135deg, white 0%, var(--cream) 100%);
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ai-service-card::after {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 300%;
+        height: 300%;
+        background: radial-gradient(
+          circle,
+          rgba(135, 169, 107, 0.05) 0%,
+          transparent 70%
+        );
+        transition: all 0.5s ease;
+      }
+
+      .ai-service-card:hover::after {
+        top: -150%;
+        left: -150%;
+      }
+
+      .ai-service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .ai-service-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--sage), #9ab880);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .ai-service-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .ai-service-description {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      .ai-service-list {
+        list-style: none;
+      }
+
+      .ai-service-list li {
+        padding: 0.5rem 0;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+      }
+
+      .ai-service-list i {
+        color: var(--sage);
+        margin-right: 0.75rem;
+      }
+
+      /* Use Cases */
+      .use-cases {
+        padding: 6rem 2rem;
+        background: var(--blush);
+      }
+
+      .use-cases-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .use-cases-grid {
+        display: grid;
+        gap: 3rem;
+        margin-top: 4rem;
+      }
+
+      .use-case {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .use-case:nth-child(even) {
+        background: var(--cream);
+      }
+
+      .use-case:nth-child(even) .use-case-content {
+        order: 2;
+      }
+
+      .use-case:nth-child(even) .use-case-visual {
+        order: 1;
+      }
+
+      .use-case-content h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .use-case-tag {
+        display: inline-block;
+        background: var(--sage);
+        color: white;
+        padding: 0.25rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+      }
+
+      .use-case-description {
+        color: var(--text);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      .use-case-benefits {
+        background: var(--cream);
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 3px solid var(--sage);
+      }
+
+      .use-case-benefits h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+        color: var(--sage);
+      }
+
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .benefit-item i {
+        color: var(--sage);
+        margin-right: 0.75rem;
+      }
+
+      .use-case-visual {
+        background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+        border-radius: 15px;
+        padding: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        position: relative;
+      }
+
+      .visual-icon {
+        font-size: 6rem;
+        color: var(--sage);
+        opacity: 0.3;
+      }
+
+      /* Tools & Technologies */
+      .tools-section {
+        padding: 6rem 2rem;
+        background: white;
+      }
+
+      .tools-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .tool-card {
+        background: var(--cream);
+        padding: 2rem 1rem;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .tool-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        background: white;
+      }
+
+      .tool-icon {
+        font-size: 3rem;
+        color: var(--sage);
+        margin-bottom: 1rem;
+      }
+
+      .tool-name {
+        font-weight: 600;
+        color: var(--charcoal);
+        font-size: 1.1rem;
+      }
+
+      .tool-category {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-top: 0.5rem;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 6rem 2rem;
+        background: linear-gradient(135deg, var(--sage), #7a9660);
+        color: white;
+        text-align: center;
+      }
+
+      .cta-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: white;
+      }
+
+      .cta-description {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        border: 2px solid transparent;
+      }
+
+      .btn-white {
+        background: white;
+        color: var(--sage);
+      }
+
+      .btn-white:hover {
+        background: var(--cream);
+        transform: translateY(-2px);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--charcoal);
+        color: var(--cream);
+        padding: 4rem 2rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: var(--cream);
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .use-case {
+          grid-template-columns: 1fr;
+        }
+
+        .use-case:nth-child(even) .use-case-content {
+          order: 1;
+        }
+
+        .use-case:nth-child(even) .use-case-visual {
+          order: 2;
+        }
+
+        .ai-features {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mobile-menu {
+          display: block;
+        }
+
+        nav {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border-top: 1px solid var(--border);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        nav.active {
+          max-height: 400px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+          flex-direction: column;
+          padding: 2rem;
+          gap: 1.5rem;
+        }
+
+        .ai-title {
+          font-size: 2.5rem;
+        }
+
+        .ai-services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tools-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="nav-container">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="mobile-menu" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+        <nav id="nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="prior-work.html">Prior Work</a></li>
+            <li><a href="media-consulting.html">Media Consulting</a></li>
+            <li>
+              <a href="ai-consulting.html" class="active">AI Consulting</a>
+            </li>
+            <li><a href="seenonscreen.html">SeenOnScreen</a></li>
+            <li><a href="askyalda.html">AskYalda</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- AI Hero -->
+    <section class="ai-hero">
+      <div class="hero-content">
+        <span class="ai-badge">Future-Forward Solutions</span>
+        <h1 class="ai-title">AI Consulting Services</h1>
+        <p class="ai-subtitle">
+          Navigate the AI revolution with strategic guidance. I help
+          organizations leverage artificial intelligence to enhance operations,
+          improve decision-making, and create innovative solutions.
+        </p>
+        <div class="ai-features">
+          <div class="ai-feature">
+            <i class="fas fa-brain"></i>
+            <span>Strategy Development</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-robot"></i>
+            <span>Implementation Support</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-chart-line"></i>
+            <span>Performance Optimization</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Services -->
+    <section class="ai-services">
+      <div class="services-container">
+        <div class="section-header">
+          <h2 class="section-title">AI Consulting Solutions</h2>
+          <p class="section-subtitle">
+            Comprehensive AI services to transform your organization's
+            capabilities and competitive advantage
+          </p>
+        </div>
+        <div class="ai-services-grid">
+          <div class="ai-service-card">
+            <div class="ai-service-icon">
+              <i class="fas fa-road"></i>
+            </div>
+            <h3 class="ai-service-title">AI Strategy & Roadmap</h3>
+            <p class="ai-service-description">
+              Develop comprehensive AI strategies aligned with your business
+              objectives and industry requirements.
+            </p>
+            <ul class="ai-service-list">
+              <li><i class="fas fa-check"></i> AI readiness assessment</li>
+              <li><i class="fas fa-check"></i> Opportunity identification</li>
+              <li><i class="fas fa-check"></i> Technology selection</li>
+              <li><i class="fas fa-check"></i> Implementation roadmap</li>
+            </ul>
+          </div>
+          <div class="ai-service-card">
+            <div class="ai-service-icon">
+              <i class="fas fa-magic"></i>
+            </div>
+            <h3 class="ai-service-title">Content AI Solutions</h3>
+            <p class="ai-service-description">
+              Leverage AI for content creation, curation, and optimization to
+              enhance your media operations.
+            </p>
+            <ul class="ai-service-list">
+              <li><i class="fas fa-check"></i> Automated content generation</li>
+              <li><i class="fas fa-check"></i> Personalization engines</li>
+              <li><i class="fas fa-check"></i> Content optimization</li>
+              <li><i class="fas fa-check"></i> Workflow automation</li>
+            </ul>
+          </div>
+          <div class="ai-service-card">
+            <div class="ai-service-icon">
+              <i class="fas fa-microscope"></i>
+            </div>
+            <h3 class="ai-service-title">Predictive Analytics</h3>
+            <p class="ai-service-description">
+              Implement AI-powered analytics to predict trends, behaviors, and
+              outcomes for better decision-making.
+            </p>
+            <ul class="ai-service-list">
+              <li><i class="fas fa-check"></i> Audience behavior prediction</li>
+              <li>
+                <i class="fas fa-check"></i> Content performance forecasting
+              </li>
+              <li><i class="fas fa-check"></i> Trend analysis</li>
+              <li><i class="fas fa-check"></i> Risk assessment</li>
+            </ul>
+          </div>
+          <div class="ai-service-card">
+            <div class="ai-service-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <h3 class="ai-service-title">Conversational AI</h3>
+            <p class="ai-service-description">
+              Design and implement chatbots and virtual assistants to enhance
+              customer engagement and support.
+            </p>
+            <ul class="ai-service-list">
+              <li><i class="fas fa-check"></i> Chatbot development</li>
+              <li><i class="fas fa-check"></i> Natural language processing</li>
+              <li><i class="fas fa-check"></i> Integration planning</li>
+              <li><i class="fas fa-check"></i> Performance optimization</li>
+            </ul>
+          </div>
+          <div class="ai-service-card">
+            <div class="ai-service-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3 class="ai-service-title">AI Training & Education</h3>
+            <p class="ai-service-description">
+              Empower your team with AI knowledge and skills through customized
+              training programs.
+            </p>
+            <ul class="ai-service-list">
+              <li><i class="fas fa-check"></i> Executive briefings</li>
+              <li><i class="fas fa-check"></i> Team workshops</li>
+              <li><i class="fas fa-check"></i> Best practices training</li>
+              <li><i class="fas fa-check"></i> Ongoing support</li>
+            </ul>
+          </div>
+          <div class="ai-service-card">
+            <div class="ai-service-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="ai-service-title">Ethical AI & Governance</h3>
+            <p class="ai-service-description">
+              Ensure responsible AI implementation with proper governance,
+              ethics, and compliance frameworks.
+            </p>
+            <ul class="ai-service-list">
+              <li><i class="fas fa-check"></i> Ethics guidelines</li>
+              <li><i class="fas fa-check"></i> Bias detection & mitigation</li>
+              <li><i class="fas fa-check"></i> Privacy compliance</li>
+              <li><i class="fas fa-check"></i> Transparency frameworks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases">
+      <div class="use-cases-container">
+        <div class="section-header">
+          <h2 class="section-title">AI in Action</h2>
+          <p class="section-subtitle">
+            Real-world applications and success stories
+          </p>
+        </div>
+        <div class="use-cases-grid">
+          <div class="use-case">
+            <div class="use-case-content">
+              <span class="use-case-tag">Media & Entertainment</span>
+              <h3>Intelligent Content Recommendations</h3>
+              <p class="use-case-description">
+                Implemented AI-driven recommendation systems that analyze
+                viewing patterns and preferences to deliver personalized content
+                suggestions, significantly improving user engagement.
+              </p>
+              <div class="use-case-benefits">
+                <h4>Key Benefits</h4>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>40% increase in content discovery</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Enhanced user satisfaction</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Reduced content search time</span>
+                </div>
+              </div>
+            </div>
+            <div class="use-case-visual">
+              <i class="fas fa-film visual-icon"></i>
+            </div>
+          </div>
+          <div class="use-case">
+            <div class="use-case-content">
+              <span class="use-case-tag">Publishing</span>
+              <h3>Automated Content Creation</h3>
+              <p class="use-case-description">
+                Deployed AI tools for automated content generation and editing,
+                enabling faster production cycles while maintaining quality and
+                brand voice consistency.
+              </p>
+              <div class="use-case-benefits">
+                <h4>Key Benefits</h4>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>70% faster content production</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Consistent brand voice</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Scalable content operations</span>
+                </div>
+              </div>
+            </div>
+            <div class="use-case-visual">
+              <i class="fas fa-newspaper visual-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools & Technologies -->
+    <section class="tools-section">
+      <div class="tools-container">
+        <div class="section-header">
+          <h2 class="section-title">AI Tools & Technologies</h2>
+          <p class="section-subtitle">
+            Expertise across leading AI platforms and frameworks
+          </p>
+        </div>
+        <div class="tools-grid">
+          <div class="tool-card">
+            <i class="fas fa-brain tool-icon"></i>
+            <div class="tool-name">OpenAI GPT</div>
+            <div class="tool-category">Language Models</div>
+          </div>
+          <div class="tool-card">
+            <i class="fas fa-robot tool-icon"></i>
+            <div class="tool-name">Claude</div>
+            <div class="tool-category">AI Assistant</div>
+          </div>
+          <div class="tool-card">
+            <i class="fas fa-chart-bar tool-icon"></i>
+            <div class="tool-name">TensorFlow</div>
+            <div class="tool-category">Machine Learning</div>
+          </div>
+          <div class="tool-card">
+            <i class="fas fa-code tool-icon"></i>
+            <div class="tool-name">Python</div>
+            <div class="tool-category">Programming</div>
+          </div>
+          <div class="tool-card">
+            <i class="fas fa-database tool-icon"></i>
+            <div class="tool-name">Vector DBs</div>
+            <div class="tool-category">Data Storage</div>
+          </div>
+          <div class="tool-card">
+            <i class="fas fa-cloud tool-icon"></i>
+            <div class="tool-name">Cloud AI</div>
+            <div class="tool-category">Infrastructure</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title">Ready to Embrace AI?</h2>
+        <p class="cta-description">
+          Let's explore how artificial intelligence can transform your
+          organization's capabilities
+        </p>
+        <a href="contact.html" class="btn btn-white">
+          <i class="fas fa-rocket"></i> Start Your AI Journey
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="social-links">
+          <a href="#" aria-label="LinkedIn"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Medium"><i class="fab fa-medium-m"></i></a>
+          <a href="mailto:mattpuretz@gmail.com" aria-label="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 Matt Puretz. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      function toggleMenu() {
+        const nav = document.getElementById("nav");
+        nav.classList.toggle("active");
+      }
+
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        const nav = document.getElementById("nav");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+          nav.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>

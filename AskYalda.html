@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AskYalda - Matt Puretz</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+      :root {
+        --primary: #d4a574;
+        --secondary: #e8c4a0;
+        --accent: #c08552;
+        --sage: #87a96b;
+        --blush: #f4e4e1;
+        --cream: #faf7f4;
+        --charcoal: #3a3a3a;
+        --text: #4a4a4a;
+        --text-light: #7a7a7a;
+        --border: #e5d5d0;
+        --purple: #a88bb5;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        color: var(--text);
+        background-color: var(--cream);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--charcoal);
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--accent);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      a:hover {
+        color: var(--primary);
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98) 0%,
+          rgba(255, 255, 255, 0.95) 100%
+        );
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--border);
+        transition: all 0.4s ease;
+      }
+
+      header.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        letter-spacing: -0.5px;
+      }
+
+      .logo span {
+        font-weight: 300;
+        font-style: italic;
+        color: var(--primary);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      nav a {
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      .mobile-menu {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--charcoal);
+      }
+
+      /* Product Hero */
+      .product-hero {
+        padding: 10rem 2rem 6rem;
+        background: linear-gradient(
+          135deg,
+          var(--cream) 0%,
+          var(--purple) 30%,
+          var(--blush) 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(
+          circle,
+          rgba(168, 139, 181, 0.1) 0%,
+          transparent 70%
+        );
+        animation: float 10s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-30px) rotate(10deg);
+        }
+      }
+
+      .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .product-info {
+        z-index: 2;
+      }
+
+      .product-badge {
+        display: inline-block;
+        background: var(--purple);
+        color: white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+      }
+
+      .product-title {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--charcoal), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .product-tagline {
+        font-size: 1.4rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+        font-style: italic;
+      }
+
+      .product-description {
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+
+      .product-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--purple), #9b7ba8);
+        color: white;
+        box-shadow: 0 10px 30px rgba(168, 139, 181, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(168, 139, 181, 0.4);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--charcoal);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--cream);
+        border-color: var(--purple);
+      }
+
+      .product-demo {
+        position: relative;
+      }
+
+      .chat-mockup {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        padding: 2rem;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .chat-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1.5rem;
+      }
+
+      .chat-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--purple), var(--primary));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .chat-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .chat-status {
+        color: var(--sage);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--sage);
+        border-radius: 50%;
+      }
+
+      .chat-messages {
+        margin-bottom: 1.5rem;
+      }
+
+      .message {
+        margin-bottom: 1rem;
+        animation: slideIn 0.5s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .message-user {
+        text-align: right;
+      }
+
+      .message-bubble {
+        display: inline-block;
+        padding: 0.75rem 1.25rem;
+        border-radius: 20px;
+        max-width: 80%;
+      }
+
+      .message-user .message-bubble {
+        background: var(--purple);
+        color: white;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message-ai .message-bubble {
+        background: var(--cream);
+        color: var(--charcoal);
+        border-bottom-left-radius: 5px;
+      }
+
+      .chat-input {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .chat-input input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 25px;
+        font-family: inherit;
+        background: var(--cream);
+      }
+
+      .chat-input button {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--purple);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .chat-input button:hover {
+        background: #9b7ba8;
+        transform: scale(1.1);
+      }
+
+      /* Features Section */
+      .features-section {
+        padding: 6rem 2rem;
+        background: white;
+      }
+
+      .features-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-light);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        padding: 2rem;
+        background: var(--cream);
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--purple), var(--primary));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        margin: 0 auto 1.5rem;
+      }
+
+      .feature-title {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+
+      .feature-description {
+        color: var(--text-light);
+        line-height: 1.8;
+      }
+
+      /* Use Cases */
+      .use-cases-section {
+        padding: 6rem 2rem;
+        background: var(--blush);
+      }
+
+      .use-cases-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .use-cases-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        padding: 0.75rem 1.5rem;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .tab-button.active {
+        background: var(--purple);
+        color: white;
+        border-color: var(--purple);
+      }
+
+      .tab-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .use-case-content {
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .use-case-header {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .use-case-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--purple), var(--primary));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+        flex-shrink: 0;
+      }
+
+      .use-case-title {
+        font-size: 2rem;
+      }
+
+      .use-case-description {
+        color: var(--text);
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+
+      .use-case-benefits {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .benefit-card {
+        padding: 1.5rem;
+        background: var(--cream);
+        border-radius: 10px;
+        display: flex;
+        align-items: start;
+        gap: 1rem;
+      }
+
+      .benefit-icon {
+        color: var(--sage);
+        font-size: 1.2rem;
+        margin-top: 0.25rem;
+      }
+
+      .benefit-text h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .benefit-text p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      /* Integration Section */
+      .integration-section {
+        padding: 6rem 2rem;
+        background: white;
+      }
+
+      .integration-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .integration-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .integration-item {
+        padding: 1.5rem;
+        background: var(--cream);
+        border-radius: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .integration-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .integration-icon {
+        font-size: 2.5rem;
+        color: var(--purple);
+        margin-bottom: 0.75rem;
+      }
+
+      .integration-name {
+        font-weight: 500;
+        color: var(--charcoal);
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 6rem 2rem;
+        background: linear-gradient(135deg, var(--purple), #b09bbf);
+        color: white;
+        text-align: center;
+      }
+
+      .cta-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: white;
+      }
+
+      .cta-description {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+      }
+
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-white {
+        background: white;
+        color: var(--purple);
+      }
+
+      .btn-white:hover {
+        background: var(--cream);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--charcoal);
+        color: var(--cream);
+        padding: 4rem 2rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: var(--cream);
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .hero-container {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .product-demo {
+          margin-top: 3rem;
+        }
+
+        .product-buttons {
+          justify-content: center;
+        }
+
+        .use-case-header {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mobile-menu {
+          display: block;
+        }
+
+        nav {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border-top: 1px solid var(--border);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        nav.active {
+          max-height: 400px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+          flex-direction: column;
+          padding: 2rem;
+          gap: 1.5rem;
+        }
+
+        .product-title {
+          font-size: 2.5rem;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .integration-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="nav-container">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="mobile-menu" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+        <nav id="nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="prior-work.html">Prior Work</a></li>
+            <li><a href="media-consulting.html">Media Consulting</a></li>
+            <li><a href="ai-consulting.html">AI Consulting</a></li>
+            <li><a href="seenonscreen.html">SeenOnScreen</a></li>
+            <li><a href="askyalda.html" class="active">AskYalda</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Product Hero -->
+    <section class="product-hero">
+      <div class="hero-container">
+        <div class="product-info">
+          <span class="product-badge">AI Innovation</span>
+          <h1 class="product-title">AskYalda</h1>
+          <p class="product-tagline">
+            Your intelligent AI companion for personalized assistance
+          </p>
+          <p class="product-description">
+            AskYalda is an advanced conversational AI assistant designed to
+            provide thoughtful, context-aware responses to help with research,
+            content creation, analysis, and decision-making.
+          </p>
+          <div class="product-buttons">
+            <a href="#" class="btn btn-primary">
+              <i class="fas fa-rocket"></i> Try AskYalda
+            </a>
+            <a href="#features" class="btn btn-secondary">
+              <i class="fas fa-play-circle"></i> Watch Demo
+            </a>
+          </div>
+        </div>
+        <div class="product-demo">
+          <div class="chat-mockup">
+            <div class="chat-header">
+              <div class="chat-avatar">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="chat-info">
+                <h3>AskYalda</h3>
+                <div class="chat-status">
+                  <span class="status-dot"></span>
+                  <span>Online & Ready</span>
+                </div>
+              </div>
+            </div>
+            <div class="chat-messages">
+              <div class="message message-user">
+                <div class="message-bubble">
+                  How can I improve my content strategy?
+                </div>
+              </div>
+              <div class="message message-ai">
+                <div class="message-bubble">
+                  I'd be happy to help! Let me analyze your current approach and
+                  provide personalized recommendations...
+                </div>
+              </div>
+            </div>
+            <div class="chat-input">
+              <input type="text" placeholder="Ask Yalda anything..." />
+              <button><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="features-container">
+        <div class="section-header">
+          <h2 class="section-title">Powerful Features</h2>
+          <p class="section-subtitle">
+            Advanced AI capabilities designed to enhance your productivity and
+            creativity
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3 class="feature-title">Contextual Understanding</h3>
+            <p class="feature-description">
+              Advanced natural language processing ensures Yalda understands
+              context and nuance in every conversation.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-user-friends"></i>
+            </div>
+            <h3 class="feature-title">Personalized Responses</h3>
+            <p class="feature-description">
+              Learns from interactions to provide increasingly personalized and
+              relevant assistance over time.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h3 class="feature-title">Multi-Domain Expertise</h3>
+            <p class="feature-description">
+              Comprehensive knowledge across various fields including media,
+              technology, business, and creative arts.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="feature-title">Privacy-First Design</h3>
+            <p class="feature-description">
+              Built with privacy and security at its core, ensuring your
+              conversations remain confidential.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-lightning"></i>
+            </div>
+            <h3 class="feature-title">Real-Time Processing</h3>
+            <p class="feature-description">
+              Lightning-fast responses with real-time processing for seamless,
+              natural conversations.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-plug"></i>
+            </div>
+            <h3 class="feature-title">API Integration</h3>
+            <p class="feature-description">
+              Easily integrate AskYalda into your existing workflows and
+              applications via robust APIs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases-section">
+      <div class="use-cases-container">
+        <div class="section-header">
+          <h2 class="section-title">How AskYalda Helps</h2>
+          <p class="section-subtitle">
+            Tailored solutions for diverse professional needs
+          </p>
+        </div>
+        <div class="use-cases-tabs">
+          <button class="tab-button active">Content Creators</button>
+          <button class="tab-button">Researchers</button>
+          <button class="tab-button">Business Leaders</button>
+          <button class="tab-button">Educators</button>
+        </div>
+        <div class="use-case-content">
+          <div class="use-case-header">
+            <div class="use-case-icon">
+              <i class="fas fa-pencil-alt"></i>
+            </div>
+            <div>
+              <h3 class="use-case-title">For Content Creators</h3>
+            </div>
+          </div>
+          <p class="use-case-description">
+            AskYalda empowers content creators with intelligent assistance for
+            ideation, writing, editing, and optimization. From blog posts to
+            social media content, get AI-powered support that enhances your
+            creative process.
+          </p>
+          <div class="use-case-benefits">
+            <div class="benefit-card">
+              <i class="fas fa-lightbulb benefit-icon"></i>
+              <div class="benefit-text">
+                <h4>Idea Generation</h4>
+                <p>
+                  Brainstorm creative concepts and unique angles for your
+                  content
+                </p>
+              </div>
+            </div>
+            <div class="benefit-card">
+              <i class="fas fa-edit benefit-icon"></i>
+              <div class="benefit-text">
+                <h4>Writing Assistance</h4>
+                <p>
+                  Get help with drafting, editing, and polishing your content
+                </p>
+              </div>
+            </div>
+            <div class="benefit-card">
+              <i class="fas fa-search benefit-icon"></i>
+              <div class="benefit-text">
+                <h4>SEO Optimization</h4>
+                <p>
+                  Optimize content for search engines and audience engagement
+                </p>
+              </div>
+            </div>
+            <div class="benefit-card">
+              <i class="fas fa-chart-line benefit-icon"></i>
+              <div class="benefit-text">
+                <h4>Performance Insights</h4>
+                <p>
+                  Analyze content performance and get improvement suggestions
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section class="integration-section">
+      <div class="integration-container">
+        <div class="section-header">
+          <h2 class="section-title">Seamless Integrations</h2>
+          <p class="section-subtitle">
+            Connect AskYalda with your favorite tools and platforms
+          </p>
+        </div>
+        <div class="integration-grid">
+          <div class="integration-item">
+            <i class="fab fa-slack integration-icon"></i>
+            <div class="integration-name">Slack</div>
+          </div>
+          <div class="integration-item">
+            <i class="fab fa-microsoft integration-icon"></i>
+            <div class="integration-name">Teams</div>
+          </div>
+          <div class="integration-item">
+            <i class="fab fa-google integration-icon"></i>
+            <div class="integration-name">Google</div>
+          </div>
+          <div class="integration-item">
+            <i class="fab fa-wordpress integration-icon"></i>
+            <div class="integration-name">WordPress</div>
+          </div>
+          <div class="integration-item">
+            <i class="fas fa-code integration-icon"></i>
+            <div class="integration-name">API</div>
+          </div>
+          <div class="integration-item">
+            <i class="fas fa-puzzle-piece integration-icon"></i>
+            <div class="integration-name">Zapier</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title">Experience the Future of AI Assistance</h2>
+        <p class="cta-description">
+          Join thousands of professionals who are already using AskYalda to
+          enhance their productivity
+        </p>
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-white">
+            <i class="fas fa-rocket"></i> Get Started Free
+          </a>
+          <a href="contact.html" class="btn btn-outline">
+            <i class="fas fa-calendar"></i> Schedule Demo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="social-links">
+          <a href="#" aria-label="LinkedIn"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Medium"><i class="fab fa-medium-m"></i></a>
+          <a href="mailto:mattpuretz@gmail.com" aria-label="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 Matt Puretz. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      function toggleMenu() {
+        const nav = document.getElementById("nav");
+        nav.classList.toggle("active");
+      }
+
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Tab functionality
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const useCaseData = {
+        "Content Creators": {
+          icon: "fa-pencil-alt",
+          title: "For Content Creators",
+          description:
+            "AskYalda empowers content creators with intelligent assistance for ideation, writing, editing, and optimization. From blog posts to social media content, get AI-powered support that enhances your creative process.",
+          benefits: [
+            {
+              icon: "fa-lightbulb",
+              title: "Idea Generation",
+              desc: "Brainstorm creative concepts and unique angles for your content",
+            },
+            {
+              icon: "fa-edit",
+              title: "Writing Assistance",
+              desc: "Get help with drafting, editing, and polishing your content",
+            },
+            {
+              icon: "fa-search",
+              title: "SEO Optimization",
+              desc: "Optimize content for search engines and audience engagement",
+            },
+            {
+              icon: "fa-chart-line",
+              title: "Performance Insights",
+              desc: "Analyze content performance and get improvement suggestions",
+            },
+          ],
+        },
+        Researchers: {
+          icon: "fa-microscope",
+          title: "For Researchers",
+          description:
+            "Accelerate your research with AI-powered analysis, literature reviews, and data interpretation. AskYalda helps you uncover insights and connections across vast amounts of information.",
+          benefits: [
+            {
+              icon: "fa-database",
+              title: "Data Analysis",
+              desc: "Process and analyze complex datasets with AI assistance",
+            },
+            {
+              icon: "fa-book",
+              title: "Literature Review",
+              desc: "Quickly summarize and synthesize research papers",
+            },
+            {
+              icon: "fa-project-diagram",
+              title: "Pattern Recognition",
+              desc: "Identify trends and patterns in your research data",
+            },
+            {
+              icon: "fa-file-alt",
+              title: "Report Generation",
+              desc: "Create comprehensive research reports and summaries",
+            },
+          ],
+        },
+        "Business Leaders": {
+          icon: "fa-briefcase",
+          title: "For Business Leaders",
+          description:
+            "Make informed decisions with AI-powered business intelligence. From strategy development to market analysis, AskYalda provides the insights you need to lead effectively.",
+          benefits: [
+            {
+              icon: "fa-chess",
+              title: "Strategic Planning",
+              desc: "Develop and refine business strategies with AI insights",
+            },
+            {
+              icon: "fa-chart-pie",
+              title: "Market Analysis",
+              desc: "Understand market trends and competitive landscapes",
+            },
+            {
+              icon: "fa-users",
+              title: "Team Productivity",
+              desc: "Enhance team collaboration and efficiency",
+            },
+            {
+              icon: "fa-tachometer-alt",
+              title: "Decision Support",
+              desc: "Get data-driven recommendations for critical decisions",
+            },
+          ],
+        },
+        Educators: {
+          icon: "fa-graduation-cap",
+          title: "For Educators",
+          description:
+            "Transform education with personalized learning assistance. AskYalda helps create engaging content, answer student questions, and provide tailored educational support.",
+          benefits: [
+            {
+              icon: "fa-chalkboard",
+              title: "Lesson Planning",
+              desc: "Create engaging and effective lesson plans",
+            },
+            {
+              icon: "fa-user-graduate",
+              title: "Student Support",
+              desc: "Provide personalized assistance to students",
+            },
+            {
+              icon: "fa-tasks",
+              title: "Assessment Creation",
+              desc: "Design comprehensive assessments and evaluations",
+            },
+            {
+              icon: "fa-comments",
+              title: "Interactive Learning",
+              desc: "Foster engaging discussions and learning experiences",
+            },
+          ],
+        },
+      };
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Remove active class from all buttons
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          // Add active class to clicked button
+          button.classList.add("active");
+
+          // Update content
+          const category = button.textContent;
+          const data = useCaseData[category];
+          const content = document.querySelector(".use-case-content");
+
+          content.innerHTML = `
+                    <div class="use-case-header">
+                        <div class="use-case-icon">
+                            <i class="fas ${data.icon}"></i>
+                        </div>
+                        <div>
+                            <h3 class="use-case-title">${data.title}</h3>
+                        </div>
+                    </div>
+                    <p class="use-case-description">${data.description}</p>
+                    <div class="use-case-benefits">
+                        ${data.benefits
+                          .map(
+                            (benefit) => `
+                            <div class="benefit-card">
+                                <i class="fas ${benefit.icon} benefit-icon"></i>
+                                <div class="benefit-text">
+                                    <h4>${benefit.title}</h4>
+                                    <p>${benefit.desc}</p>
+                                </div>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                `;
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        const nav = document.getElementById("nav");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+          nav.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
