@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prior Work - Matt Puretz</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+      :root {
+        --primary: #d4a574;
+        --secondary: #e8c4a0;
+        --accent: #c08552;
+        --sage: #87a96b;
+        --blush: #f4e4e1;
+        --cream: #faf7f4;
+        --charcoal: #3a3a3a;
+        --text: #4a4a4a;
+        --text-light: #7a7a7a;
+        --border: #e5d5d0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        color: var(--text);
+        background-color: var(--cream);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--charcoal);
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--accent);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      a:hover {
+        color: var(--primary);
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98) 0%,
+          rgba(255, 255, 255, 0.95) 100%
+        );
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--border);
+        transition: all 0.4s ease;
+      }
+
+      header.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        letter-spacing: -0.5px;
+      }
+
+      .logo span {
+        font-weight: 300;
+        font-style: italic;
+        color: var(--primary);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      nav a {
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      .mobile-menu {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--charcoal);
+      }
+
+      /* Page Hero */
+      .page-hero {
+        padding: 10rem 2rem 4rem;
+        background: linear-gradient(
+          135deg,
+          var(--cream) 0%,
+          var(--blush) 50%,
+          white 100%
+        );
+        text-align: center;
+      }
+
+      .page-title {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--charcoal), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .page-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 6rem 2rem;
+        background: white;
+      }
+
+      .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .about-content h2 span {
+        font-style: italic;
+        color: var(--primary);
+      }
+
+      .about-text {
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+      }
+
+      .expertise-list {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .expertise-list li {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        background: var(--cream);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .expertise-list li:hover {
+        background: var(--blush);
+        transform: translateX(5px);
+      }
+
+      .expertise-list i {
+        color: var(--primary);
+        margin-right: 0.75rem;
+      }
+
+      .about-image {
+        position: relative;
+      }
+
+      .about-image img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+      }
+
+      .stats-card {
+        position: absolute;
+        bottom: -30px;
+        left: -30px;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: var(--primary);
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Experience Timeline */
+      .timeline-section {
+        padding: 6rem 2rem;
+        background: var(--cream);
+      }
+
+      .timeline-container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .timeline {
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border);
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .timeline-content {
+        width: calc(50% - 40px);
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content {
+        margin-left: auto;
+      }
+
+      .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: 50%;
+        top: 2rem;
+        width: 20px;
+        height: 20px;
+        background: var(--primary);
+        border: 4px solid white;
+        border-radius: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+      }
+
+      .timeline-date {
+        color: var(--primary);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-company {
+        color: var(--text-light);
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+
+      .timeline-description {
+        color: var(--text);
+        line-height: 1.8;
+      }
+
+      /* Media Appearances */
+      .media-section {
+        padding: 6rem 2rem;
+        background: white;
+      }
+
+      .media-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .media-card {
+        background: var(--cream);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .media-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .media-thumbnail {
+        position: relative;
+        padding-bottom: 56.25%;
+        background: var(--blush);
+      }
+
+      .media-thumbnail iframe,
+      .media-thumbnail img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .media-content {
+        padding: 1.5rem;
+      }
+
+      .media-badge {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .media-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .media-description {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      /* Publications */
+      .publications-section {
+        padding: 6rem 2rem;
+        background: var(--blush);
+      }
+
+      .publications-container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .publication-list {
+        margin-top: 3rem;
+      }
+
+      .publication-item {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        transition: all 0.3s ease;
+      }
+
+      .publication-item:hover {
+        transform: translateX(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .publication-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .publication-content {
+        flex: 1;
+      }
+
+      .publication-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .publication-meta {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .publication-link {
+        color: var(--primary);
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--charcoal);
+        color: var(--cream);
+        padding: 4rem 2rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: var(--cream);
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .about-container {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .about-image {
+          order: -1;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+
+        .stats-card {
+          position: static;
+          margin-top: 2rem;
+          display: inline-block;
+        }
+
+        .timeline::before {
+          left: 30px;
+        }
+
+        .timeline-content {
+          width: calc(100% - 80px);
+          margin-left: 80px !important;
+        }
+
+        .timeline-dot {
+          left: 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mobile-menu {
+          display: block;
+        }
+
+        nav {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border-top: 1px solid var(--border);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        nav.active {
+          max-height: 400px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+          flex-direction: column;
+          padding: 2rem;
+          gap: 1.5rem;
+        }
+
+        .page-title {
+          font-size: 2.5rem;
+        }
+
+        .expertise-list {
+          grid-template-columns: 1fr;
+        }
+
+        .media-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .publication-item {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="nav-container">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="mobile-menu" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+        <nav id="nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="prior-work.html" class="active">Prior Work</a></li>
+            <li><a href="media-consulting.html">Media Consulting</a></li>
+            <li><a href="ai-consulting.html">AI Consulting</a></li>
+            <li><a href="seenonscreen.html">SeenOnScreen</a></li>
+            <li><a href="askyalda.html">AskYalda</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <h1 class="page-title">Prior Work & Experience</h1>
+      <p class="page-subtitle">
+        A journey through media innovation, research, and strategic consulting
+      </p>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <div class="about-container">
+        <div class="about-content">
+          <h2>Bridging Research <span>&</span> Practice</h2>
+          <p class="about-text">
+            With over a decade of experience in media and technology, I
+            specialize in helping organizations navigate the evolving landscape
+            of digital content and audience engagement. My work combines
+            rigorous research methodologies with practical implementation
+            strategies.
+          </p>
+          <p class="about-text">
+            I've had the privilege of working with diverse organizations, from
+            startups to established media companies, helping them understand
+            their audiences better and create more impactful content strategies.
+          </p>
+          <ul class="expertise-list">
+            <li>
+              <i class="fas fa-check-circle"></i> Media Research & Analysis
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Content Strategy Development
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> AI & Technology Integration
+            </li>
+            <li><i class="fas fa-check-circle"></i> Audience Engagement</li>
+            <li><i class="fas fa-check-circle"></i> Digital Transformation</li>
+            <li><i class="fas fa-check-circle"></i> Strategic Consulting</li>
+          </ul>
+        </div>
+        <div class="about-image">
+          <img src="images/WebSiteHeadshot.jpg" alt="Matt Puretz" />
+          <div class="stats-card">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="timeline-section">
+      <div class="timeline-container">
+        <div class="section-header">
+          <h2 class="section-title">Professional Journey</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2023 - Present</div>
+              <h3 class="timeline-title">Independent Consultant</h3>
+              <p class="timeline-company">Media & AI Strategy</p>
+              <p class="timeline-description">
+                Providing strategic consulting services to help organizations
+                leverage media research and AI technologies for enhanced
+                audience engagement and content optimization.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2020 - 2023</div>
+              <h3 class="timeline-title">Senior Media Strategist</h3>
+              <p class="timeline-company">Leading Media Company</p>
+              <p class="timeline-description">
+                Led cross-functional teams in developing data-driven content
+                strategies and implementing innovative audience research
+                methodologies.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2018 - 2020</div>
+              <h3 class="timeline-title">Research Analyst</h3>
+              <p class="timeline-company">Technology Firm</p>
+              <p class="timeline-description">
+                Conducted comprehensive media consumption studies and developed
+                predictive models for content performance optimization.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media Appearances -->
+    <section class="media-section">
+      <div class="media-container">
+        <div class="section-header">
+          <h2 class="section-title">Media Appearances</h2>
+        </div>
+        <div class="media-grid">
+          <div class="media-card">
+            <div class="media-thumbnail">
+              <!-- Replace YOUR_VIDEO_ID with actual YouTube video ID -->
+              <iframe
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                title="TV Interview"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            <div class="media-content">
+              <span class="media-badge">TV Interview</span>
+              <h3 class="media-title">The Future of Media Consumption</h3>
+              <p class="media-description">
+                Discussion on emerging trends in digital media and audience
+                behavior patterns.
+              </p>
+            </div>
+          </div>
+          <div class="media-card">
+            <div class="media-thumbnail">
+              <!-- Replace with your actual image -->
+              <img src="/api/placeholder/600/400" alt="Speaking Engagement" />
+            </div>
+            <div class="media-content">
+              <span class="media-badge">Conference</span>
+              <h3 class="media-title">AI in Media Strategy</h3>
+              <p class="media-description">
+                Keynote presentation on integrating AI tools for content
+                optimization.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="publications-section">
+      <div class="publications-container">
+        <div class="section-header">
+          <h2 class="section-title">Reports & Publications</h2>
+        </div>
+        <div class="publication-list">
+          <div class="publication-item">
+            <div class="publication-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="publication-content">
+              <h3 class="publication-title">
+                Understanding Digital Audience Behavior
+              </h3>
+              <p class="publication-meta">Research Report • 2024</p>
+              <a href="#" class="publication-link">
+                Read Report <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="publication-item">
+            <div class="publication-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="publication-content">
+              <h3 class="publication-title">
+                Media Trends Analysis: What's Next
+              </h3>
+              <p class="publication-meta">Industry Analysis • 2024</p>
+              <a href="#" class="publication-link">
+                View Analysis <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="publication-item">
+            <div class="publication-icon">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="publication-content">
+              <h3 class="publication-title">
+                Upcoming: AI Integration in Content Strategy
+              </h3>
+              <p class="publication-meta">White Paper • Coming 2025</p>
+              <a href="#" class="publication-link">
+                Get Notified <i class="fas fa-bell"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="social-links">
+          <a href="#" aria-label="LinkedIn"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Medium"><i class="fab fa-medium-m"></i></a>
+          <a href="mailto:mattpuretz@gmail.com" aria-label="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 Matt Puretz. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      function toggleMenu() {
+        const nav = document.getElementById("nav");
+        nav.classList.toggle("active");
+      }
+
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        const nav = document.getElementById("nav");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+          nav.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
