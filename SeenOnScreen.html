@@ -286,20 +286,24 @@
         display: block;
       }
 
-      /* Features Section */
-      .features-section {
-        padding: 6rem 2rem;
+      /* Main Content Sections */
+      .content-section {
+        padding: 5rem 2rem;
         background: white;
       }
 
-      .features-container {
+      .content-section:nth-child(even) {
+        background: var(--cream);
+      }
+
+      .content-container {
         max-width: 1200px;
         margin: 0 auto;
       }
 
       .section-header {
         text-align: center;
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
       }
 
       .section-title {
@@ -310,193 +314,254 @@
       .section-subtitle {
         font-size: 1.2rem;
         color: var(--text-light);
+        max-width: 700px;
+        margin: 0 auto;
       }
 
+      /* Page Hero */
+      .page-hero {
+        padding: 10rem 2rem 4rem;
+        background: linear-gradient(
+          135deg,
+          var(--cream) 0%,
+          var(--blush) 50%,
+          white 100%
+        );
+        text-align: center;
+      }
+
+      .page-title {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--charcoal), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .page-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+      
+      /* Project Overview */
+      .project-overview {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+        margin-bottom: 4rem;
+      }
+
+      .overview-text {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        color: var(--text);
+      }
+
+      .overview-text p {
+        margin-bottom: 1.5rem;
+      }
+
+      .project-stats {
+        background: var(--cream);
+        padding: 2rem;
+        border-radius: 15px;
+        border: 1px solid var(--border);
+      }
+
+      .stat-item {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-light);
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-value {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        color: var(--charcoal);
+        font-weight: 600;
+      }
+
+      /* Features Grid */
       .features-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
+        margin-top: 3rem;
       }
 
       .feature-card {
+        background: white;
         padding: 2rem;
-        background: var(--cream);
         border-radius: 15px;
+        border: 1px solid var(--border);
         transition: all 0.3s ease;
       }
 
       .feature-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       }
 
       .feature-icon {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.5rem;
+        font-size: 2.5rem;
+        color: var(--accent);
         margin-bottom: 1.5rem;
       }
 
       .feature-title {
         font-size: 1.4rem;
         margin-bottom: 1rem;
-      }
-
-      .feature-description {
-        color: var(--text-light);
-        line-height: 1.8;
-      }
-
-      /* Tech Stack */
-      .tech-section {
-        padding: 6rem 2rem;
-        background: var(--blush);
-      }
-
-      .tech-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .tech-grid {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        margin-top: 3rem;
-      }
-
-      .tech-item {
-        background: white;
-        padding: 1rem 2rem;
-        border-radius: 30px;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        transition: all 0.3s ease;
-        border: 1px solid var(--border);
-      }
-
-      .tech-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        border-color: var(--primary);
-      }
-
-      .tech-icon {
-        font-size: 1.5rem;
-        color: var(--primary);
-      }
-
-      .tech-name {
-        font-weight: 500;
         color: var(--charcoal);
       }
 
-      /* Process Section */
-      .process-section {
-        padding: 6rem 2rem;
-        background: white;
+      .feature-description {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--text);
       }
 
-      .process-container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .process-timeline {
+      /* Problem/Solution Section */
+      .problem-solution {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-top: 3rem;
+      }
+
+      .ps-box {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        border: 2px solid var(--border);
+      }
+
+      .ps-box h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--charcoal);
+      }
+
+      .ps-box.problem {
+        border-color: var(--sage);
+      }
+
+      .ps-box.solution {
+        border-color: var(--accent);
+      }
+
+      .ps-box p {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+
+      /* Impact Section */
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
-        margin-top: 4rem;
-        position: relative;
+        margin-top: 3rem;
       }
 
-      .process-step {
-        text-align: center;
-        position: relative;
+      .impact-card {
+        background: linear-gradient(135deg, var(--blush) 0%, white 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        border: 1px solid var(--border);
       }
 
-      .step-number {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin: 0 auto 1.5rem;
+      .impact-icon {
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 1rem;
       }
 
-      .step-title {
+      .impact-title {
         font-size: 1.3rem;
-        margin-bottom: 0.75rem;
+        margin-bottom: 1rem;
+        color: var(--charcoal);
       }
 
-      .step-description {
-        color: var(--text-light);
+      .impact-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--text);
+      }
+
+      /* Technical Implementation */
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .tech-badge {
+        background: var(--cream);
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        font-size: 0.95rem;
+        color: var(--text);
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      .tech-badge:hover {
+        background: var(--secondary);
+        border-color: var(--primary);
       }
 
       /* CTA Section */
       .cta-section {
-        padding: 6rem 2rem;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
+        background: linear-gradient(135deg, var(--charcoal) 0%, var(--accent) 100%);
         color: white;
+        padding: 4rem 2rem;
         text-align: center;
       }
 
-      .cta-container {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .cta-title {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+      .cta-section h2 {
         color: white;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
       }
 
-      .cta-description {
+      .cta-section p {
         font-size: 1.2rem;
         margin-bottom: 2rem;
-        opacity: 0.95;
+        opacity: 0.9;
       }
 
-      .cta-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-
-      .btn-white {
+      .btn {
+        display: inline-block;
+        padding: 1rem 2.5rem;
         background: white;
-        color: var(--primary);
-      }
-
-      .btn-white:hover {
-        background: var(--cream);
-        transform: translateY(-2px);
-      }
-
-      .btn-outline {
-        background: transparent;
-        color: white;
+        color: var(--charcoal);
+        border-radius: 50px;
+        font-weight: 500;
+        transition: all 0.3s ease;
         border: 2px solid white;
       }
 
-      .btn-outline:hover {
-        background: rgba(255, 255, 255, 0.1);
+      .btn:hover {
+        background: transparent;
+        color: white;
+        transform: translateY(-2px);
       }
 
       /* Footer */
@@ -613,10 +678,8 @@
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="PriorWork.html">Prior Work</a></li>
-            <li><a href="MediaConsulting.html">Media Consulting</a></li>
-            <li><a href="AIConsulting.html">AI Consulting</a></li>
-            <li><a href="SeenOnScreen.html" class="active">SeenOnScreen</a></li>
             <li><a href="AskYalda.html">AskYalda</a></li>
+            <li><a href="SeenOnScreen.html" class="active">SeenOnScreen</a></li>
             <li><a href="Contact.html">Contact</a></li>
           </ul>
         </nav>
@@ -629,34 +692,30 @@
         <div class="project-info">
           <span class="project-badge">Featured Project</span>
           <h1 class="project-title">SeenOnScreen</h1>
-          <p class="project-tagline">
-            Transforming how audiences discover and engage with media content
+          <p class="project-description">
+            As a media researcher and social psychologist, I noticed that the
+            media representation space was dominated almost exclusively by
+            top-down, expert-driven analyses. While these expert perspectives
+            are valuable, they miss something critical: the lived experiences of
+            people with those identities, especially young people and
+            multiply-marginalized communities who are often excluded from
+            positions of expertise. 
           </p>
           <p class="project-description">
-            SeenOnScreen is an innovative platform that bridges the gap between
-            content creators and their audiences, providing intelligent
-            recommendations and deep insights into media consumption patterns.
+            With this in mind, I built SeenOnScreen: a
+            platform where anyone can rate media based on how well it represents
+            their identity and experiences, and discover new content that might
+            make them feel seen.
           </p>
           <div class="project-buttons">
-            <a href="#" class="btn btn-primary">
-              <i class="fas fa-external-link-alt"></i> Visit Live Site
-            </a>
-            <a href="#features" class="btn btn-secondary">
-              <i class="fas fa-info-circle"></i> Learn More
+            <a href="www.seen-onscreen.com" class="btn btn-primary">
+              <i class="fas fa-external-link-alt"></i> Visit Gated Site
             </a>
           </div>
         </div>
         <div class="project-preview">
-          <div class="browser-mockup">
-            <div class="browser-bar">
-              <div class="browser-dot"></div>
-              <div class="browser-dot"></div>
-              <div class="browser-dot"></div>
-              <div class="browser-url">seenonscreen.com</div>
-            </div>
-            <!-- Replace with actual screenshot -->
             <img
-              src="/api/placeholder/800/600"
+              src="/images/SeenOnScreen.png"
               alt="SeenOnScreen Screenshot"
               class="project-screenshot"
             />
@@ -665,183 +724,225 @@
       </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-      <div class="features-container">
-        <div class="section-header">
-          <h2 class="section-title">Key Features</h2>
-          <p class="section-subtitle">
-            Powerful tools for media discovery and engagement
-          </p>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-search"></i>
-            </div>
-            <h3 class="feature-title">Smart Discovery</h3>
-            <p class="feature-description">
-              Advanced algorithms help users discover content that matches their
-              interests and viewing patterns, making content discovery
-              effortless and enjoyable.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <h3 class="feature-title">Analytics Dashboard</h3>
-            <p class="feature-description">
-              Comprehensive analytics provide content creators with deep
-              insights into audience behavior, engagement metrics, and content
-              performance.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <h3 class="feature-title">Community Features</h3>
-            <p class="feature-description">
-              Built-in community tools foster engagement between creators and
-              audiences, enabling meaningful connections and feedback.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h3 class="feature-title">Responsive Design</h3>
-            <p class="feature-description">
-              Seamlessly accessible across all devices, ensuring a consistent
-              and optimized experience whether on desktop, tablet, or mobile.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-brain"></i>
-            </div>
-            <h3 class="feature-title">AI-Powered Insights</h3>
-            <p class="feature-description">
-              Leveraging artificial intelligence to provide personalized
-              recommendations and predictive analytics for both users and
-              content creators.
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3 class="feature-title">Privacy-First</h3>
-            <p class="feature-description">
-              Built with privacy at its core, ensuring user data is protected
-              while still delivering personalized experiences.
-            </p>
-          </div>
-        </div>
+    <section class="content-section">
+      <div class="content-container">
+    <div class="project-stats">
+      <div class="stat-item">
+        <div class="stat-label">Project Status</div>
+        <div class="stat-value">Gated Beta</div>
       </div>
-    </section>
+      <div class="stat-item">
+        <div class="stat-label">Launch Date</div>
+        <div class="stat-value">June 2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
-    <!-- Tech Stack -->
-    <section class="tech-section">
-      <div class="tech-container">
-        <div class="section-header">
-          <h2 class="section-title">Technology Stack</h2>
-          <p class="section-subtitle">
-            Built with modern, scalable technologies
-          </p>
-        </div>
-        <div class="tech-grid">
-          <div class="tech-item">
-            <i class="fab fa-react tech-icon"></i>
-            <span class="tech-name">React</span>
-          </div>
-          <div class="tech-item">
-            <i class="fab fa-node-js tech-icon"></i>
-            <span class="tech-name">Node.js</span>
-          </div>
-          <div class="tech-item">
-            <i class="fas fa-database tech-icon"></i>
-            <span class="tech-name">PostgreSQL</span>
-          </div>
-          <div class="tech-item">
-            <i class="fab fa-python tech-icon"></i>
-            <span class="tech-name">Python</span>
-          </div>
-          <div class="tech-item">
-            <i class="fab fa-aws tech-icon"></i>
-            <span class="tech-name">AWS</span>
-          </div>
-          <div class="tech-item">
-            <i class="fas fa-robot tech-icon"></i>
-            <span class="tech-name">Machine Learning</span>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- The Problem & Solution -->
+<section class="content-section">
+<div class="content-container">
+  <div class="section-header">
+    <h2 class="section-title">The Problem & The Solution</h2>
+  </div>
+  <div class="problem-solution">
+    <div class="ps-box problem">
+      <h3>The Problem</h3>
+      <p>
+        Media representation analysis has been dominated by expert-driven commentary, missing diverse perspectives from people with lived experiences of marginalized identities.
+      </p>
+      <p>
+        Marginalized communities—especially multiply-marginalized people and young people—have fewer opportunities to occupy positions of expertise, yet their perspectives are essential for authentic representation.
+      </p>
+      <p>
+        The entertainment industry lacks comprehensive, identity-based feedback from actual audiences about representation quality.
+      </p>
+    </div>
 
-    <!-- Process Section -->
-    <section class="process-section">
-      <div class="process-container">
-        <div class="section-header">
-          <h2 class="section-title">Development Process</h2>
-          <p class="section-subtitle">From concept to launch</p>
-        </div>
-        <div class="process-timeline">
-          <div class="process-step">
-            <div class="step-number">1</div>
-            <h3 class="step-title">Research</h3>
-            <p class="step-description">
-              Extensive user research and market analysis to identify key pain
-              points and opportunities
-            </p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">2</div>
-            <h3 class="step-title">Design</h3>
-            <p class="step-description">
-              User-centered design process with iterative prototyping and
-              testing
-            </p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">3</div>
-            <h3 class="step-title">Development</h3>
-            <p class="step-description">
-              Agile development methodology with continuous integration and
-              deployment
-            </p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">4</div>
-            <h3 class="step-title">Launch</h3>
-            <p class="step-description">
-              Strategic rollout with ongoing optimization based on user feedback
-              and analytics
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="ps-box solution">
+      <h3>The Solution</h3>
+      <p>
+        SeenOnScreen democratizes media representation feedback by allowing anyone to rate content based on their personal experiences and identity.
+      </p>
+      <p>
+        Users rate content on multiple dimensions: how much they like it, how much they see themselves reflected, how well it captures their cultural identity and specific experiences.
+      </p>
+      <p>
+        The platform aggregates this data to provide both personalized recommendations and public consensus feedback for the media industry on representation quality.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="cta-container">
-        <h2 class="cta-title">Interested in Similar Solutions?</h2>
-        <p class="cta-description">
-          Let's discuss how we can create innovative media platforms for your
-          organization
-        </p>
-        <div class="cta-buttons">
-          <a href="contact.html" class="btn btn-white">
-            <i class="fas fa-envelope"></i> Get in Touch
-          </a>
-          <a href="media-consulting.html" class="btn btn-outline">
-            <i class="fas fa-arrow-right"></i> View Services
-          </a>
-        </div>
+<!-- Key Features -->
+<section class="content-section">
+<div class="content-container">
+  <div class="section-header">
+    <h2 class="section-title">Key Features</h2>
+    <p class="section-subtitle">
+      Powerful tools for discovery and authentic feedback on representation
+    </p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-star"></i>
       </div>
-    </section>
+      <h3 class="feature-title">Multi-Dimensional Rating System</h3>
+      <p class="feature-description">
+        Rate content on enjoyment, personal reflection, cultural accuracy, and how well it captures your specific experiences—creating nuanced feedback beyond simple ratings.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-filter"></i>
+      </div>
+      <h3 class="feature-title">Identity-Filtered Recommendations</h3>
+      <p class="feature-description">
+        Discover media that users with similar identities love. Search any title and see aggregated ratings filtered by specific user identities.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-search"></i>
+      </div>
+      <h3 class="feature-title">Comprehensive Content Library</h3>
+      <p class="feature-description">
+        Browse thousands of titles across television shows, movies, video games, and YouTube content creators—all in one place.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-users"></i>
+      </div>
+      <h3 class="feature-title">Community-Driven Insights</h3>
+      <p class="feature-description">
+        Connect with others who share your experiences. See what your community is watching and how they're rating representation quality.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <h3 class="feature-title">Industry Feedback Loop</h3>
+      <p class="feature-description">
+        Generate public consensus data that entertainment industry professionals can use to understand how well their content represents diverse identities.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <h3 class="feature-title">Personalized Discovery</h3>
+      <p class="feature-description">
+        Find content you might love but wouldn't have discovered otherwise—media that will make you feel seen, created by people who understand your experience.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Impact -->
+<section class="content-section">
+<div class="content-container">
+  <div class="section-header">
+    <h2 class="section-title">The Impact</h2>
+    <p class="section-subtitle">
+      Centering marginalized voices to improve media representation
+    </p>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <h3 class="impact-title">For Audiences</h3>
+      <p class="impact-description">
+        Discover content that resonates with your identity and experiences. Find representation that builds confidence, creates belonging, and makes you feel truly seen.
+      </p>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-icon">
+        <i class="fas fa-tv"></i>
+      </div>
+      <h3 class="impact-title">For Content Creators</h3>
+      <p class="impact-description">
+        Access authentic feedback from diverse audiences about representation quality. Understand how your content is experienced by people with the identities you're representing.
+      </p>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-icon">
+        <i class="fas fa-microphone"></i>
+      </div>
+      <h3 class="impact-title">For Marginalized Communities</h3>
+      <p class="impact-description">
+        Amplify voices that are often excluded from expert positions. Ensure multiply-marginalized perspectives—especially from young people—shape the conversation about representation.
+      </p>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-icon">
+        <i class="fas fa-industry"></i>
+      </div>
+      <h3 class="impact-title">For the Entertainment Industry</h3>
+      <p class="impact-description">
+        Move beyond expert-only analysis to incorporate broad, authentic audience perspectives. Make data-driven decisions about representation that reflect actual audience experiences.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Technical Implementation -->
+<section class="content-section">
+<div class="content-container">
+  <div class="section-header">
+    <h2 class="section-title">Building SeenOnScreen</h2>
+    <p class="section-subtitle">
+      Leveraging AI and modern web technologies for scalable impact
+    </p>
+  </div>
+
+  <div class="overview-text">
+    <p>
+      I built SeenOnScreen as an independent project with the assistance of Claude 3.5 and 3.7 Sonnet as AI coding assistants. The platform is designed to scale, enabling collection and analysis of representation data across thousands of media titles.
+    </p>
+    <p>
+      The web application combines a comprehensive media database with sophisticated rating mechanisms and identity-based filtering, all designed to center user experiences and provide meaningful insights.
+    </p>
+  </div>
+
+  <div class="tech-stack">
+    <div class="tech-badge">AI-Assisted Development</div>
+    <div class="tech-badge">Claude 3.5 & 3.7 Sonnet</div>
+    <div class="tech-badge">Web Application</div>
+    <div class="tech-badge">Rating System Design</div>
+    <div class="tech-badge">Identity-Based Filtering</div>
+    <div class="tech-badge">Data Aggregation</div>
+    <div class="tech-badge">Community Features</div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+<h2>Interested in Learning More?</h2>
+<p>
+  SeenOnScreen is currently in gated beta. Reach out to learn more about the platform, discuss partnership opportunities, or explore how this approach to representation feedback could benefit your organization.
+</p>
+<a href="Contact.html" class="btn">Get In Touch</a>
+</section>
 
     <!-- Footer -->
     <footer>
