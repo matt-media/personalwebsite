@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Studies - Matt Puretz</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+      :root {
+        --primary: #d4a574;
+        --secondary: #e8c4a0;
+        --accent: #c08552;
+        --sage: #87a96b;
+        --blush: #f4e4e1;
+        --cream: #faf7f4;
+        --charcoal: #3a3a3a;
+        --text: #4a4a4a;
+        --text-light: #7a7a7a;
+        --border: #e5d5d0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        color: var(--text);
+        background-color: var(--cream);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--charcoal);
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--accent);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      a:hover {
+        color: var(--primary);
+      }
+
+      /* Header - same as other pages */
+      header {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98) 0%,
+          rgba(255, 255, 255, 0.95) 100%
+        );
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--border);
+        transition: all 0.4s ease;
+      }
+
+      header.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        letter-spacing: -0.5px;
+      }
+
+      .logo span {
+        font-weight: 300;
+        font-style: italic;
+        color: var(--primary);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      nav a {
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      .mobile-menu {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--charcoal);
+      }
+
+      /* Page Hero */
+      .page-hero {
+        padding: 10rem 2rem 4rem;
+        background: linear-gradient(
+          135deg,
+          var(--cream) 0%,
+          var(--blush) 50%,
+          white 100%
+        );
+        text-align: center;
+      }
+
+      .page-title {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--charcoal), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .page-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* Case Study Sections */
+      .case-study-section {
+        padding: 4rem 2rem;
+        background: white;
+      }
+
+      .case-study-section:nth-child(even) {
+        background: var(--cream);
+      }
+
+      .case-study-container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .case-study-header {
+        display: flex;
+        align-items: start;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid var(--border);
+      }
+
+      .case-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: white;
+        flex-shrink: 0;
+      }
+
+      .case-title-block h2 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .case-meta {
+        color: var(--text-light);
+        font-size: 1.1rem;
+      }
+
+      .case-content-block {
+        margin-bottom: 3rem;
+      }
+
+      .case-content-block h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      .case-content-block h4 {
+        font-size: 1.3rem;
+        margin: 1.5rem 0 0.75rem;
+        color: var(--charcoal);
+      }
+
+      .case-content-block p {
+        color: var(--text);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+
+      .case-content-block ul,
+      .case-content-block ol {
+        margin-left: 2rem;
+        color: var(--text);
+        line-height: 1.8;
+      }
+
+      .case-content-block li {
+        margin-bottom: 0.5rem;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .metric-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        border: 1px solid var(--border);
+      }
+
+      .case-study-section:nth-child(even) .metric-card {
+        background: white;
+      }
+
+      .metric-number {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: var(--primary);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .metric-label {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      .callout-box {
+        background: var(--blush);
+        padding: 2rem;
+        border-radius: 15px;
+        border-left: 4px solid var(--primary);
+        margin: 2rem 0;
+      }
+
+      .callout-box h4 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--charcoal);
+        color: var(--cream);
+        padding: 4rem 2rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: var(--cream);
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .mobile-menu {
+          display: block;
+        }
+
+        nav {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border-top: 1px solid var(--border);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        nav.active {
+          max-height: 400px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+          flex-direction: column;
+          padding: 2rem;
+          gap: 1.5rem;
+        }
+
+        .page-title {
+          font-size: 2.5rem;
+        }
+
+        .case-study-header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .case-title-block h2 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="nav-container">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="mobile-menu" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+        <nav id="nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="PriorWork.html">Prior Work</a></li>
+            <li><a href="CaseStudies.html" class="active">Case Studies</a></li>
+            <li><a href="MediaConsulting.html">Media Consulting</a></li>
+            <li><a href="AIConsulting.html">AI Consulting</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <h1 class="page-title">Case Studies</h1>
+      <p class="page-subtitle">
+        Deep dives into strategic thinking, problem-solving, and impact
+      </p>
+    </section>
+
+    <!-- Case Study 1: AskYalda -->
+    <section class="case-study-section">
+      <div class="case-study-container">
+        <div class="case-study-header">
+          <div class="case-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="case-title-block">
+            <h2>AskYalda: AI Research Assistant</h2>
+            <p class="case-meta">Product Manager | 2024 - Present</p>
+          </div>
+        </div>
+
+        <div class="case-content-block">
+          <h3>The Challenge</h3>
+          <p>
+            [YOUR CONTENT: Describe the problem you identified. What gap existed
+            in the market? What pain points did creators/organizations have? Why
+            wasn't the existing solution (hiring consultants, reading papers)
+            working?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Strategic Approach</h3>
+          <h4>Initial Research & Validation</h4>
+          <p>
+            [YOUR CONTENT: How did you validate this was a real problem worth
+            solving? What research did you do? Did you talk to potential users?
+            What convinced you this was the right solution?]
+          </p>
+
+          <h4>Product Strategy Decisions</h4>
+          <p>
+            [YOUR CONTENT: Walk through key decisions: - Why RAG architecture
+            vs. fine-tuning? - Why Claude vs. other LLMs? - Why free tier first
+            vs. immediate monetization? - How did you decide what features to
+            include in MVP?]
+          </p>
+
+          <div class="callout-box">
+            <h4>Key Tradeoff</h4>
+            <p>
+              [YOUR CONTENT: Describe one major tradeoff you had to navigate.
+              What were the options? What did you choose and why? What did you
+              sacrifice? Example: accuracy vs. speed, free vs. paid, breadth vs.
+              depth of content, etc.]
+            </p>
+          </div>
+
+          <h4>Building & Launch</h4>
+          <p>
+            [YOUR CONTENT: How did you actually build this? What was your
+            process for curating the 2,500 research insights? How did you test?
+            What challenges came up during development? How did you handle
+            them?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Results & Impact</h3>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span class="metric-number">214</span>
+              <span class="metric-label">Active Users</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-number">91%</span>
+              <span class="metric-label">Would Recommend</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-number">2,500+</span>
+              <span class="metric-label">Research Insights</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-number">$0</span>
+              <span class="metric-label">Marketing Budget</span>
+            </div>
+          </div>
+          <p>
+            [YOUR CONTENT: What was the actual impact? Beyond the numbers, what
+            changed? Did creators make better content? Did anyone report using
+            it successfully? What testimonials or stories do you have?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Lessons Learned</h3>
+          <p>
+            [YOUR CONTENT: What would you do differently? What surprised you?
+            What worked better than expected? What didn't work as planned? What
+            did this teach you about AI product management?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Next Steps</h3>
+          <p>
+            [YOUR CONTENT: Where is this going? What's the enterprise strategy?
+            How are you thinking about monetization? What features are you
+            planning? What's the vision for scale?]
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study 2: YouTube Teen Creator Guide -->
+    <section class="case-study-section">
+      <div class="case-study-container">
+        <div class="case-study-header">
+          <div
+            class="case-icon"
+            style="background: linear-gradient(135deg, #ff0000, #cc0000)"
+          >
+            <i class="fab fa-youtube"></i>
+          </div>
+          <div class="case-title-block">
+            <h2>YouTube Teen Creator Guide</h2>
+            <p class="case-meta">Co-Lead Author | December 2024 Release</p>
+          </div>
+        </div>
+
+        <div class="case-content-block">
+          <h3>The Challenge</h3>
+          <p>
+            [YOUR CONTENT: What was YouTube trying to solve? Why did they need
+            this guide? What was happening with teen-facing content that
+            necessitated algorithm changes? What gap existed between platform
+            policy and creator understanding?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Strategic Approach</h3>
+          <h4>Stakeholder Management</h4>
+          <p>
+            [YOUR CONTENT: Who were the stakeholders? How did you balance
+            YouTube's platform goals, creators' business needs, teens'
+            wellbeing, and research accuracy? Walk through how you navigated
+            competing priorities.]
+          </p>
+
+          <h4>Research Translation</h4>
+          <p>
+            [YOUR CONTENT: How did you take complex algorithm parameters and
+            developmental psychology research and make it actionable for
+            creators? What was your process? What frameworks did you use? How
+            did you test whether guidance was actually usable?]
+          </p>
+
+          <div class="callout-box">
+            <h4>Key Challenge</h4>
+            <p>
+              [YOUR CONTENT: What was the hardest part of this project? Was it
+              balancing competing interests? Translating technical concepts?
+              Managing the scope? How did you overcome it?]
+            </p>
+          </div>
+
+          <h4>Project Management</h4>
+          <p>
+            [YOUR CONTENT: As co-lead author, what did you actually manage?
+            Timeline? Contributors? Review process? How did you coordinate
+            between YouTube, CSS, and other stakeholders?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Results & Impact</h3>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span class="metric-number">100+</span>
+              <span class="metric-label">Countries</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-number">1,500</span>
+              <span class="metric-label">Teen Sample</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-number">Multi</span>
+              <span class="metric-label">Language Release</span>
+            </div>
+          </div>
+          <p>
+            [YOUR CONTENT: What's the expected impact? How will you measure
+            success? What does success look like for YouTube? For creators? For
+            teens?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Strategic Insights</h3>
+          <p>
+            [YOUR CONTENT: What did this teach you about platform strategy?
+            About working at the intersection of policy, research, and creator
+            ecosystems? What would you bring to a role at a company like
+            Anthropic based on this experience?]
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study 3: SeenOnScreen (Optional - could add teen media report instead) -->
+    <section class="case-study-section">
+      <div class="case-study-container">
+        <div class="case-study-header">
+          <div
+            class="case-icon"
+            style="background: linear-gradient(135deg, var(--sage), #9ab880)"
+          >
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="case-title-block">
+            <h2>SeenOnScreen: Representation Discovery Platform</h2>
+            <p class="case-meta">Founder & Developer | 2023 - Present</p>
+          </div>
+        </div>
+
+        <div class="case-content-block">
+          <h3>The Challenge</h3>
+          <p>
+            [YOUR CONTENT: What problem were you solving? Why doesn't existing
+            discovery (Netflix, IMDb, etc.) work for representation? What gap
+            did you see?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Strategic Approach</h3>
+          <h4>Product Vision</h4>
+          <p>
+            [YOUR CONTENT: Why this approach vs. others? Why rating-based vs.
+            tagging-based? Why identity-focused vs. demographic-focused? What
+            was your product philosophy?]
+          </p>
+
+          <h4>Technical Implementation</h4>
+          <p>
+            [YOUR CONTENT: Walk through building this with Claude. What was your
+            process? What technical challenges did you face? How did you
+            approach API integrations? Why these specific platforms (movies, TV,
+            games, YouTube)?]
+          </p>
+
+          <div class="callout-box">
+            <h4>AI Implementation Strategy</h4>
+            <p>
+              [YOUR CONTENT: Talk about the recommendation engine you're
+              building. What approach are you taking? What challenges exist in
+              identity-based recommendations that don't exist in traditional
+              collaborative filtering?]
+            </p>
+          </div>
+        </div>
+
+        <div class="case-content-block">
+          <h3>Current Status & Next Steps</h3>
+          <p>
+            [YOUR CONTENT: Where is this now? What's working? What needs work?
+            What's your roadmap? How are you thinking about growth vs.
+            refinement?]
+          </p>
+        </div>
+
+        <div class="case-content-block">
+          <h3>What This Demonstrates</h3>
+          <p>
+            [YOUR CONTENT: What does this project show about your capabilities?
+            Product thinking? Technical skills? Ability to ship? Understanding
+            of AI/ML? Commitment to social impact?]
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <a href="index.html" class="logo">Matt <span>Puretz</span></a>
+        <div class="social-links">
+          <a
+            href="https://www.linkedin.com/in/matt-puretz-8b979652/"
+            aria-label="LinkedIn"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 Matt Puretz. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const nav = document.getElementById("nav");
+        nav.classList.toggle("active");
+      }
+
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        const nav = document.getElementById("nav");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+          nav.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
