@@ -669,47 +669,41 @@
       });
 
       // Form submission
-      document
-        .getElementById("contactForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+      document.getElementById("contactForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-          // Collect form data
-          const formData = new FormData(this);
-          const data = Object.fromEntries(formData);
+  const form = this;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const successMessage = document.getElementById("successMessage");
 
-          // Create mailto link with form data
-          const subject = encodeURIComponent(data.subject);
-          const body = encodeURIComponent(
-            `Name: ${data.name}\n` +
-              `Email: ${data.email}\n` +
-              `Company: ${data.company || "Not specified"}\n\n` +
-              `Message:\n${data.message}`
-          );
+  // Disable button to prevent double-submit
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending...";
 
-          // Open email client
-          window.location.href = `mailto:mattpuretz@gmail.com?subject=${subject}&body=${body}`;
+  try {
+    const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    });
 
-          // Show success message
-          document.getElementById("successMessage").style.display = "block";
-
-          // Reset form
-          this.reset();
-
-          // Hide success message after 5 seconds
-          setTimeout(() => {
-            document.getElementById("successMessage").style.display = "none";
-          }, 5000);
-        });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener("click", (e) => {
-        const nav = document.getElementById("nav");
-        const mobileMenu = document.querySelector(".mobile-menu");
-        if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
-          nav.classList.remove("active");
-        }
-      });
+    if (response.ok) {
+      successMessage.style.display = "block";
+      form.reset();
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 5000);
+    } else {
+      const data = await response.json();
+      alert(data?.errors?.[0]?.message || "Something went wrong. Please try again.");
+    }
+  } catch (err) {
+    alert("Network error — please try again or email me directly.");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Send Message"; // match your original button text
+  }
+});
     </script>
   </body>
 </html>
